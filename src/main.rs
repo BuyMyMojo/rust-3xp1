@@ -4,7 +4,7 @@ use tracing::{Level, instrument, event};
 use tracing_subscriber;
 use clap::Parser;
 
-/// Simple program to greet a person
+/// Simple tool to bruteforce 3x+1 for a second loop. Only takes positive numbers
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
 struct Args {
@@ -36,7 +36,7 @@ fn main() {
     event!(Level::INFO, "Starting number: {}", args.start);
     event!(Level::INFO, "Amount of numbers to try: {}", args.count);
 
-    if args.verbose{
+    if args.verbose & !args.double_verbose{
         for current_num in args.start..max_num{
             event!(Level::INFO, "Processing {}", current_num);
             let (smallest_num, largest_num) = txpo(current_num);
