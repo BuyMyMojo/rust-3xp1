@@ -1,7 +1,7 @@
 
 # Rust 3x+1
 
-Simple tool to bruteforce 3x+1 for a second loop. Only takes positive numbers.
+Simple tool to brute force 3x+1 for a second loop. Only takes positive numbers.
 
 
 ## Usage

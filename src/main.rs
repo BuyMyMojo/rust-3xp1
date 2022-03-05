@@ -4,7 +4,7 @@ use tracing::{Level, instrument, event};
 use tracing_subscriber;
 use clap::Parser;
 
-/// Simple tool to bruteforce 3x+1 for a second loop. Only takes positive numbers
+/// Simple tool to brute force 3x+1 for a second loop. Only takes positive numbers
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
 struct Args {
