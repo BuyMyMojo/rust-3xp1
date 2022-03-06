@@ -74,7 +74,10 @@ fn txpo(mut current_num: u128) -> (u128, u128) {
                 largest_num = current_num;
             }
 
-            current_num = current_num.mul(3) + 1;  // For some reason using .mul() is faster then * but .add() is slightly slower then +. it was only a few ms slower to do all 50K but on an extremely large scale it matters
+            // For some reason using .mul() is faster then * but .add() is slightly slower then +.
+            // it was only a few ms slower to do all 50K but on an extremely large scale it matters.
+            current_num = current_num.mul(3) + 1;
+
         } else {
             if current_num < smallest_num{
                 smallest_num = current_num;
@@ -84,7 +87,22 @@ fn txpo(mut current_num: u128) -> (u128, u128) {
                 largest_num = current_num;
             }
 
-            current_num = current_num >> 1;  // Divides by 2 a bit faster
+            // Writing this one line taught me about bit shifting.
+            // doing >> on an unsigned integer (u8-u16-u32-u64-u128) does something called
+            // Logical Right Shifting. This removes the least significant bit or the right most
+            // bit and places a 0 on the left. so the binary form of 8 is 1000, doing 8>>1 shifts
+            // the bits to the right once, this takes the last 0 and removes it making it 100, we
+            // then add a new 0 to the left making it 0100 which is binary for 4.
+            // This is more efficient then just trying to do division because there is no actual
+            // math involved and just a super quick bit operation.
+            //
+            // Another example:
+            // 69420 >> 1 == 34710
+            // 0001 0000 1111 0010 1100 >> 1
+            // 0001 0000 1111 0010 110
+            // 0000 1000 0111 1001 0110 == 34710
+            //
+            current_num = current_num >> 1;
         }
 
         if current_num == smallest_num {
@@ -107,7 +125,6 @@ fn verbose_txpo(mut current_num: u128) -> (u128, u128) {
     let mut smallest_num_count = 1;
     while smallest_num_count != 2{
 
-        // if odd
         if current_num % 2 != 0 {
             if current_num < smallest_num{
                 smallest_num = current_num;
@@ -119,7 +136,7 @@ fn verbose_txpo(mut current_num: u128) -> (u128, u128) {
 
             event!(Level::INFO, "{} is odd. Smallest number: {}. Largest number: {}", current_num, smallest_num, largest_num);
 
-            current_num = current_num.mul(3) + 1;  // For some reason using .mul() is faster then * but .add() is slightly slower then +. it was only a few ms slower to do all 50K but on an extremely large scale it matters
+            current_num = current_num.mul(3) + 1;
         } else {
             if current_num < smallest_num{
                 smallest_num = current_num;
@@ -131,7 +148,7 @@ fn verbose_txpo(mut current_num: u128) -> (u128, u128) {
 
             event!(Level::INFO, "{} is even. Smallest number: {}. Largest number: {}", current_num, smallest_num, largest_num);
 
-            current_num = current_num >> 1;  // Divides by 2 a bit faster
+            current_num = current_num >> 1;
         }
 
         if current_num == smallest_num {
