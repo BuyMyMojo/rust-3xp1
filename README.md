@@ -3,6 +3,9 @@
 
 Simple tool to brute force 3x+1 for a second loop. Only takes positive numbers.
 
+It detects a new loop by checking if the smallest number it has encountered appears again. It is my theory that if there is another loop it will probably be the smallest number it has encoutnered.
+
+This doesn't detect if there is a run away event where a number shoots into infinity (Or the max of a [U128 int](https://learning-rust.github.io/docs/a8.primitive_data_types.html#u8-u16-u32-u64-u128)) but if you ever find an area where it loops into infinity or crashes then you can run that smaller section of numbers if `-d` which will output every operation, use this to find what number it is and what path is taken. 
 
 ## Usage
 
@@ -33,3 +36,8 @@ check out [this](https://youtu.be/094y1Z2wpJg) viceo by Veritasium
 
 This hasn't left my brain since I saw the video, I wanted to mess around with a tool to brute force for a new loop.
 
+#### Will a new loop happen on the smallest number?
+
+The base of this entire code is that the smallest number is where a new loop will be found. Based on the [4 known loops](https://en.wikipedia.org/wiki/Collatz_conjecture#Iterating_on_all_integers) where the number that it loops around to is also the closest number to 0 in that cycle I do belive so.
+
+There is no real way of knowing without checking or finding a number that leaves this code running forever at which point you will have to investigate fruther with `-d`.
