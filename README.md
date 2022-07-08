@@ -30,7 +30,7 @@ OPTIONS:
 
 #### What is 3x+1?
 
-check out [this](https://youtu.be/094y1Z2wpJg) viceo by Veritasium
+check out [this](https://youtu.be/094y1Z2wpJg) video by Veritasium
 
 #### Why?
 
