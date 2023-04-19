@@ -23,9 +23,6 @@ OPTIONS:
 ```
 
 
-## Demo
-
-![](https://files.buymymojo.net/ussgwsivh9co.gif)
 ## FAQ
 
 #### What is 3x+1?
